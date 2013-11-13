@@ -1,0 +1,19 @@
+<h2><?= $this->translate('Feedback form') ?></h2>
+<hr/>
+<div class="small-8">
+    <?=
+    $this->form()
+        ->openTag($form); ?>
+    <?php foreach ($form as $element) : ?>
+        <?= $this->render('part/foundation-element.phtml', ['element' => $element]) ?>
+    <?php endforeach; ?>
+    <div class="row">
+        <div class="small-offset-3 small-9 columns">
+            <button type="submit"><?= $this->translate('Send') ?></button>
+        </div>
+    </div>
+
+    <?=
+    $this->form()
+        ->closeTag() ?>
+</div>

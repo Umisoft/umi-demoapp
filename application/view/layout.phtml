@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <title><?= $this->translate("Welcome to UMI.Framework") ?> | <?= $this->translate($title) ?></title>
+
+    <?php
+    echo $this->headStyle()
+        ->prependFile('/css/style.css')
+        ->prependFile('/css/foundation.min.css')
+        ->prependFile('/css/normalize.min.css');
+    ?>
+
+    <script src="/js/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="large-12 columns">
+        <div class="row">
+            <div class="large-12 columns">
+
+                <nav class="top-bar">
+                    <ul class="title-area">
+                        <li class="name">
+                            <h1><a href="<?= $this->url('home', [], true) ?>">UMI.Framework</a></h1>
+                        </li>
+                    </ul>
+
+                    <section class="top-bar-section">
+                        <ul class="right">
+                            <li class="divider"></li>
+                            <li class="active">
+                                <a href="<?= $this->url('home', [], true) ?>">
+                                    <?= $this->translate("Home"); ?>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="<?= $this->url('home/component', ['component' => 'blog'], true) ?>">
+                                    <?= $this->translate("Blog"); ?>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="<?= $this->url('home/component', ['component' => 'feedback'], true) ?>">
+                                    <?= $this->translate("Feedback"); ?>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 25px">
+            <div class="columns large-12"><?php
+                echo $content;
+                ?></div>
+        </div>
+
+        <footer class="row">
+            <div class="large-12 columns">
+                <hr/>
+                <div class="row">
+                    <div class="small-6 columns">
+                        <?php if ($user = $this->getCurrentUser()) : ?>
+                            <?= $this->translate('Welcome, {user}.', ['user' => $user->name]) ?>
+                            <a href="<?= $this->componentUrl('auth', 'logout', [], true) ?>">
+                                <?= $this->translate('Logout') ?>
+                            </a>
+                        <?php else : ?>
+                            <a href="<?= $this->componentUrl('auth', 'login', [], true) ?>">
+                                <?= $this->translate('Login') ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    <div class="small-6 columns text-right">
+                        <small><?= $this->translate("&copy; Umisoft ltd. 2007-2013") ?></small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+<?php
+echo $this->headScript()
+    ->prependScript(
+        '$(document).foundation();'
+    )
+    ->prependFile('/js/foundation.min.js')
+    ->prependFile('/js/vendor/jquery.js');
+?>
+</body>
+</html>

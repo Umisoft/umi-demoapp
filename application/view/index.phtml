@@ -1,0 +1,14 @@
+<div class="panel">
+    <h1><?= $this->translate('UMI.Framework demo application!') ?></h1>
+
+    <p><?=
+        $this->translate(
+            'This is simple blog application.'
+        );?></p>
+
+    <p>
+        <a href="<?= $this->url('home', ['lang' => 'ru-RU'], true) ?>">rus</a>
+        /
+        <a href="<?= $this->url('home', ['lang' => 'en-US'], true) ?>">eng</a>
+    </p>
+</div>

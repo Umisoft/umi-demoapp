@@ -1,0 +1,107 @@
+<?php
+namespace application\components\blog\model;
+
+use umi\hmvc\model\IModel;
+use umi\orm\collection\ICollectionManagerAware;
+use umi\orm\collection\TCollectionManagerAware;
+use umi\orm\object\IObject;
+use umi\orm\objectset\IManyToManyObjectSet;
+use umi\orm\selector\ISelector;
+
+/**
+ * Модель для работы с тегами блога.
+ */
+class TagModel implements ICollectionManagerAware, IModel
+{
+    use TCollectionManagerAware;
+
+    /**
+     * Возвращает теги поста.
+     * @param $tag
+     * @return ISelector
+     */
+    public function getTagPosts(IObject $tag)
+    {
+        return $this->getCollectionManager()
+            ->getCollection('posts')
+            ->select()
+            ->orderBy('publishTime', ISelector::ORDER_DESC)
+            ->where('tags')
+            ->equals($tag);
+    }
+
+    /**
+     * Возвращает тег по GUID.
+     * @param string $guid идентификатор
+     * @return IObject
+     */
+    public function getTag($guid)
+    {
+        return $this->getCollectionManager()
+            ->getCollection('tags')
+            ->get($guid);
+    }
+
+    /**
+     * Выставляет теги для поста
+     * @param IObject $post пост
+     * @param array $tagNames список тегов
+     */
+    public function setTagsToPost(IObject $post, array $tagNames)
+    {
+        /**
+         * @var IManyToManyObjectSet $postTags
+         */
+        $postTags = $post->getValue('tags');
+
+        foreach ($tagNames as $tagName) {
+            $postTags->attach($this->addTag($tagName));
+        }
+    }
+
+    /**
+     * Добавляет тег или возвращает существующий
+     * @param string $tagName имя тега
+     * @return IObject
+     */
+    public function addTag($tagName)
+    {
+        $tagName = trim($tagName);
+        $tagCollection = $this->getCollectionManager()
+            ->getCollection('tags');
+        $result = $tagCollection->select()
+            ->where('name')
+            ->equals($tagName)
+            ->getResult();
+        if (!$result->count()) {
+            return $tagCollection->add()
+                ->setValue('name', $tagName);
+        }
+
+        return $result->fetch();
+    }
+
+    /**
+     * Возвращает список тегов, которые содержат заданную часть
+     * @param string $tagPart часть тега
+     * @return array
+     */
+    public function getTags($tagPart)
+    {
+        $tagCollection = $this->getCollectionManager()
+            ->getCollection('tags');
+        $result = $tagCollection->select()
+            ->fields('name')
+            ->where('name')
+            ->like('%' . $tagPart . '%');
+        $tags = [];
+        /**
+         * @var IObject $tag
+         */
+        foreach ($result as $tag) {
+            $tags[] = $tag->getValue('name');
+        }
+
+        return $tags;
+    }
+}

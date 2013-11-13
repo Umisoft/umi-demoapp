@@ -1,0 +1,33 @@
+<?php
+global $actions;
+?>
+<script type="application/javascript">
+    jQuery(function () {
+        jQuery('.toggleNext').click(function () {
+            $(this).next().toggle();
+        });
+    });
+</script>
+<style>
+    a.toggleNext {
+        color: red;
+    }
+    pre {
+        font-size: small;
+        max-height: 400px;
+        overflow: scroll;
+        display: none;
+    }
+</style>
+
+<ul class="no-bullet">
+    <?php foreach ($actions as $action) : ?>
+        <?php if (is_array($action)) : list($action, $description) = $action ?>
+            <li>
+                <a href="javascript:void(0);" class="toggleNext"><?= $action ?></a>
+                <pre><?= $description ?></pre>
+            </li>
+        <?php else: ?>
+            <li><?= $action ?></li>
+        <?php endif; ?>
+    <?php endforeach; ?></ul>

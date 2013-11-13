@@ -1,0 +1,22 @@
+<h2>{{ translate('Add post') }}</h2>
+<hr/>
+
+<div class="small-8">
+    {{ form().openTag(form)|raw }}
+    {% for element in form %}
+        {% if element.getAttributes['type'] != 'hidden' %}
+            {{ include('part/foundation-element.twig', {'element': element}) }}
+        {% else %}
+            {{ form().formElement(element)|raw }}
+        {% endif %}
+    {% endfor %}
+    <div class="row">
+        <div class="small-offset-3 small-9 columns">
+            <button type="submit">{{ translate("Add post") }}</button>
+        </div>
+    </div>
+    {{ form().closeTag()|raw }}
+
+    <hr/>
+    <a href="{{ url('index') }}">{{ translate('Back to all posts') }}</a>
+</div>

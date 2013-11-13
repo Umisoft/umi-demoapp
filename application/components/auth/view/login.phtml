@@ -1,0 +1,28 @@
+<h2><?= $this->translate('Authentication') ?></h2>
+<hr/>
+<div class="small-8">
+    <?php if ($message) : ?>
+        <div class="row">
+            <div class="small-offset-3 small-9 columns">
+                <div class="alert-box alert">
+                    <?= $message ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?=
+    $this->form()
+        ->openTag($form); ?>
+    <?php foreach ($form as $element) : ?>
+        <?= $this->render('part/foundation-element.phtml', ['element' => $element]) ?>
+    <?php endforeach; ?>
+    <div class="row">
+        <div class="small-offset-3 small-9 columns">
+            <button type="submit"><?= $this->translate('Login') ?></button>
+        </div>
+    </div>
+
+    <?=
+    $this->form()
+        ->closeTag() ?>
+</div>

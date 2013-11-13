@@ -1,0 +1,24 @@
+{% if (post) %}
+    <div class="post row">
+        <div class="small-12 columns">
+            <small><a href="{{ url('author', {'id': post.owner.guid}) }}">{{ post.owner.name }}</a>
+                - {{ post.publishTime|date("d.m.Y | H:i") }}</small>
+            <br/>
+            <h4>{{ post.title }}</h4>
+            {% if (post.tags) %}
+                <div class="tags">
+                    {% for tag in post.tags %}
+                        <a href="{{ url('tag', {'id': tag.guid}) }}">{{ tag.name }}</a>{{ loop.last ? '' : ',' }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br/>
+
+            <div style="white-space: pre-wrap">{{ post['content'] }}</div>
+        </div>
+    </div>
+{% else %}
+    <h2>{{ translate('Post not found') }}</h2>
+{% endif %}
+<hr/>
+<a href="{{ url('index') }}">{{ translate('Back to all posts') }}</a>

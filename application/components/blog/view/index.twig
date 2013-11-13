@@ -1,0 +1,58 @@
+{% if (paginator.getPageItems()) %}
+    {% if (getCurrentUser()) %}
+        {% do headScript().appendScript("$('.delete a').click(function() {
+		if (confirm('%s')) {
+			$(this).parent('form').submit();
+		}
+	});"|format(translate('Do you want to delete post?'))) %}
+    {% endif %}
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>{{ translate('Blog') }}</h2>
+
+            {% if (getCurrentUser()) %}
+                <div class="large-3 column text-right">
+                    <a class="button" href="{{ url('addPost') }}">{{ translate('Add post') }}</a>
+                </div>
+            {% endif %}
+
+            <hr/>
+        </div>
+    </div>
+    {% for post in paginator.getPageItems() %}
+        <div class="post row" id="post_{{ post.id }}">
+            <div class="small-12 columns">
+                <small><a href="{{ url('author', {'id': post.owner.guid}) }}">{{ post.owner.name }}</a>
+                    - {{ post.publishTime|date("d.m.Y | H:i") }}</small>
+
+                {% if (getCurrentUser()) %}
+                    {{ form().openTag(deleteForm)|raw }}
+                    <a href="#" class="close" title="{{ translate('Delete') }}">&times;</a>
+                    <input type="hidden" name="id" value="{{ post.guid }}">
+                    {{ form().formElement(deleteForm.getElement('csrf'))|raw }}
+                    {{ form().closeTag()|raw }}
+                {% endif %}
+                <h4>
+                    <a href="{{ url('post', {'id': post.guid}) }}">{{ post.title }}</a>
+                </h4>
+                {% if (post.tags) %}
+                    <div class="tags">
+                        {% for tag in post.tags %}
+                            <a href="{{ url('tag', {'id': tag.guid}) }}">{{ tag.name }}</a>{{ loop.last ? '' : ',' }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <br/>
+                {{ post.content[:250] }}...
+                <a href="{{ url('post', {'id': post.guid}) }}">{{ translate('read more') }}</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    <hr/>
+
+    {{ include('part/paginator.twig', {'paginator': paginatorSliding(paginator, 3), 'route': 'index'}) }}
+
+{% else %}
+    <h2>{{ translate('No posts found') }}</h2>
+{% endif %}

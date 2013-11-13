@@ -1,0 +1,26 @@
+{% if paginator.pagesCount %}
+    {% set previousLabel = translate('Previous') %}
+    {% set nextLabel = translate('Next') %}
+<ul class="pagination">
+    {% if paginator.previousPage %}
+        <li class="arrow"><a href="{{ url(route, {'page': paginator.previousPage}) }}">&lt;</a></li>
+    {% else %}
+        <li class="unavailable arrow"><a href="#">&lt;</a></li>
+    {% endif %}
+
+    <!-- Numbered page links -->
+    {% for page in paginator.pagesRange %}
+        {% if (page != paginator.currentPage) %}
+            <li><a href="{{ url(route, {'page': page}) }}">{{ page }}</a></li>
+        {% else %}
+            <li class="current"><a href="#">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Next page link -->
+    {% if paginator.nextPage %}
+        <li class="arrow"><a href="{{ url(route, {'page': paginator.nextPage}) }}">&gt;</a></li>
+    {% else %}
+        <li class="unavailable arrow"><a href="#">&gt;</a></li>
+    {% endif %}
+{% endif %}
