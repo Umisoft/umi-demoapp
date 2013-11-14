@@ -49,9 +49,7 @@
         </div>
     {% endfor %}
 
-    <hr/>
-
-    {{ include('part/paginator.twig', {'paginator': paginatorSliding(paginator, 3), 'route': 'index'}) }}
+    {{ include('part/paginator.twig', {'paginator': pagination().sliding(paginator, 3), 'route': 'index'}) }}
 
 {% else %}
     <h2>{{ translate('No posts found') }}</h2>

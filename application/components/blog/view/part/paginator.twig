@@ -1,6 +1,7 @@
-{% if paginator.pagesCount %}
+{% if paginator.pagesCount > 1 %}
     {% set previousLabel = translate('Previous') %}
     {% set nextLabel = translate('Next') %}
+    <hr/>
 <ul class="pagination">
     {% if paginator.previousPage %}
         <li class="arrow"><a href="{{ url(route, {'page': paginator.previousPage}) }}">&lt;</a></li>
