@@ -1,6 +1,6 @@
 <?php
     return [
-        'app' => [
+        'application' => [
             'ru-RU' => [
                 'Welcome to UMI.Framework' => 'Добро пожаловать в UMI.Framework',
                 '&copy; Umisoft ltd. 2007-2013' => '&copy; ООО «Юмисофт» 2007-2013',
