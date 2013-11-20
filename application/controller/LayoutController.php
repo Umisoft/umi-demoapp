@@ -33,7 +33,10 @@ class LayoutController extends BaseController
     {
         return $this->response
             ->setContent(
-                new DisplayModel('layout', ['content' => $this->response->getContent()])
+                new DisplayModel('layout', [
+                    'title' => ucfirst($request->getVar(IComponentRequest::ROUTE, 'component', 'home')),
+                    'content' => $this->response->getContent()
+                ])
             );
     }
 }
