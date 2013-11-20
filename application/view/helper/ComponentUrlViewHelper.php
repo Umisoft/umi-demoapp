@@ -8,18 +8,15 @@
 namespace application\view\helper;
 
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\context\IComponentContext;
-use umi\hmvc\context\IRequestContext;
-use umi\hmvc\context\TComponentContext;
-use umi\hmvc\context\TRequestContext;
+use umi\hmvc\context\IContextAware;
+use umi\hmvc\context\TContextAware;
 
 /**
  * Помощник вида для вывода URL дочернего компонента.
  */
-class ComponentUrlViewHelper implements IComponentContext, IRequestContext
+class ComponentUrlViewHelper implements IContextAware
 {
-    use TComponentContext;
-    use TRequestContext;
+    use TContextAware;
 
     /**
      * Помощник вида для вывода URL дочернего компонента.
@@ -30,7 +27,7 @@ class ComponentUrlViewHelper implements IComponentContext, IRequestContext
      */
     public function __invoke($child, $name, array $params = [])
     {
-        $childComponent = $this->getContextComponent()
+        $childComponent = $this->getContext()->getComponent()
             ->getChildComponent($child);
 
         return $this->getCurrentPathToComponent($child) . $childComponent->getRouter()
@@ -45,10 +42,10 @@ class ComponentUrlViewHelper implements IComponentContext, IRequestContext
     protected function getCurrentPathToComponent($name)
     {
         $router = $this
-            ->getContextComponent()
+            ->getContext()->getComponent()
             ->getRouter();
 
-        $requestRouteParams = $this->getContextRequest()
+        $requestRouteParams = $this->getContext()->getRequest()
             ->getParams(IComponentRequest::ROUTE)
             ->toArray();
 

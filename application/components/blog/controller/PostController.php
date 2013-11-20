@@ -39,7 +39,7 @@ class PostController extends BaseController
             throw new HttpNotFound('Post not found.', 0, $e);
         }
 
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'post',
             [
                 'post' => $this->postModel->getPost($guid),

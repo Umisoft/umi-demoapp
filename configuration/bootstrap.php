@@ -17,6 +17,7 @@ return [
     Bootstrap::OPTION_TOOLKIT  => [
         require($libraryPath . '/authentication/toolbox/config.php'),
         require($libraryPath . '/i18n/toolbox/config.php'),
+        require($libraryPath . '/event/toolbox/config.php'),
         require($libraryPath . '/config/toolbox/config.php'),
         require($libraryPath . '/http/toolbox/config.php'),
         require($libraryPath . '/route/toolbox/config.php'),
@@ -43,9 +44,7 @@ return [
         I18nTools::NAME => [
             'currentLocale' => 'ru-RU',
 
-            'translator' => [
-                'dictionaries' => require('i18n.php')
-            ]
+            'translatorDictionaries' => require('i18n.php')
         ]
     ]
 ];

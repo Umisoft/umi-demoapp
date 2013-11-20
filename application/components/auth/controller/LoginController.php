@@ -12,7 +12,7 @@ use umi\form\IForm;
 use umi\form\IFormAware;
 use umi\form\TFormAware;
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\controller\result\IControllerResult;
+use umi\hmvc\component\response\IComponentResponse;
 use umi\hmvc\controller\type\BaseController;
 
 /**
@@ -43,7 +43,7 @@ class LoginController extends BaseController implements IFormAware
     public function __invoke(IComponentRequest $request)
     {
         if ($this->userModel->isAuthenticated()) {
-            return $this->createControllerResult('already', ['user' => $this->userModel->getCurrentUser()]);
+            return $this->createDisplayResponse('already', ['user' => $this->userModel->getCurrentUser()]);
         }
 
         $form = $this->createForm(require dirname(__DIR__) . '/form/login.php');
@@ -64,7 +64,7 @@ class LoginController extends BaseController implements IFormAware
                     return $response;
                 };
 
-                return $this->createControllerResult('success', ['user' => $this->userModel->getCurrentUser()]);
+                return $this->createDisplayResponse('success', ['user' => $this->userModel->getCurrentUser()]);
             }
 
             return $this->showForm($form);
@@ -77,11 +77,11 @@ class LoginController extends BaseController implements IFormAware
      * Выводит форму авторизации.
      * @param IForm $form форма
      * @param string $flashMessage сообщение [optional]
-     * @return IControllerResult
+     * @return IComponentResponse
      */
     protected function showForm(IForm $form, $flashMessage = null)
     {
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'login',
             [
                 'message' => $flashMessage,

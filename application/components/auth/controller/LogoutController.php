@@ -9,16 +9,16 @@ namespace application\components\auth\controller;
 
 use application\model\UserModel;
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\context\IRouterContext;
-use umi\hmvc\context\TRouterContext;
+use umi\hmvc\context\IContextAware;
+use umi\hmvc\context\TContextAware;
 use umi\hmvc\controller\type\BaseController;
 
 /**
  * Class LogoutController
  */
-class LogoutController extends BaseController implements IRouterContext
+class LogoutController extends BaseController implements IContextAware
 {
-    use TRouterContext;
+    use TContextAware;
 
     /**
      * @var UserModel $userModel модель пользователей
@@ -42,7 +42,7 @@ class LogoutController extends BaseController implements IRouterContext
         $this->userModel->logout();
 
         return $this->createRedirectResponse(
-            $this->getContextRouter()
+            $this->getContext()->getComponent()->getRouter()
                 ->getBaseUrl() ? : '/'
         );
     }

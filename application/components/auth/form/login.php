@@ -30,8 +30,7 @@ return [
             ],
             // валидаторы значения элемента
             'validators' => [
-                IValidatorFactory::TYPE_REQUIRED => [],
-                IValidatorFactory::TYPE_EMAIL    => []
+                IValidatorFactory::TYPE_REQUIRED => []
             ]
         ],
         // элемента Password

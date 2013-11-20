@@ -34,7 +34,7 @@ class AuthorController extends BaseController
 
         $author = $this->authorModel->getAuthor($guid);
 
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'author',
             [
                 'author' => $author,

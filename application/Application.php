@@ -4,7 +4,7 @@ namespace application;
 use umi\hmvc\component\Component;
 use umi\hmvc\component\request\IComponentRequest;
 use umi\hmvc\component\response\IComponentResponse;
-use umi\hmvc\controller\result\IControllerResult;
+use umi\hmvc\context\Context;
 use umi\i18n\ILocalesService;
 use umi\session\ISessionAware;
 use umi\session\TSessionAware;
@@ -63,23 +63,14 @@ class Application extends Component implements ISessionAware, IToolkitAware
      */
     public function processResponse(IComponentResponse &$response, IComponentRequest $request)
     {
-        if (!$this->getControllerFactory()
-            ->hasController(self::LAYOUT_CONTROLLER)
-        ) {
+        if (!$this->getControllerFactory()->hasController(self::LAYOUT_CONTROLLER)) {
             return;
         }
 
-        $controller = $this->getControllerFactory()
-            ->createController(self::LAYOUT_CONTROLLER, [$response->getContent()]);
+        $context = new Context($this, $request);
+        $controller = $this->getControllerFactory()->createController(self::LAYOUT_CONTROLLER, [$response]);
 
-        $result = $controller($request);
-
-        if ($result instanceof IControllerResult) {
-            $view = $this->getContextView($request);
-
-            $response
-                ->setContent($view->render($result->getTemplate(), $result->getVariables()));
-        }
+        $response = $this->callController($controller, $context);
     }
 
     /**

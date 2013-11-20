@@ -8,7 +8,7 @@ use umi\form\IForm;
 use umi\form\IFormAware;
 use umi\form\TFormAware;
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\controller\result\IControllerResult;
+use umi\hmvc\component\response\IComponentResponse;
 use umi\hmvc\controller\type\BaseController;
 use umi\hmvc\exception\http\HttpForbidden;
 use umi\orm\persister\IObjectPersisterAware;
@@ -82,7 +82,7 @@ class AddPostController extends BaseController implements IFormAware, IObjectPer
             $this->getObjectPersister()
                 ->commit();
 
-            return $this->createControllerResult('complete');
+            return $this->createDisplayResponse('complete', []);
         }
 
         return $this->showForm($form);
@@ -91,11 +91,11 @@ class AddPostController extends BaseController implements IFormAware, IObjectPer
     /**
      * Показывает форму добавления нового поста в блог.
      * @param IForm $form форма
-     * @return IControllerResult
+     * @return IComponentResponse
      */
     protected function showForm(IForm $form)
     {
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'postAdd',
             [
                 'form' => $form

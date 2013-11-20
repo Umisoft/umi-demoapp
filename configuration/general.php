@@ -13,15 +13,15 @@ return [
         AuthenticationTools::NAME => [
             'factories' => [
                 'authentication' => [
-                    'adapter' => [
+                    'defaultAdapter' => [
                         'type' => IAuthenticationFactory::ADAPTER_ORM,
                         'options' => [
-                            'collectionName' => 'users',
+                            'collection' => 'users',
                             'loginFields' => ['login', 'email'],
                             'passwordField' => 'password'
                         ]
                     ],
-                    'storage' => [
+                    'defaultStorage' => [
                         'type' => IAuthenticationFactory::STORAGE_ORM_SESSION
                     ]
                 ]
@@ -43,24 +43,20 @@ return [
             ],
         ],
         ORMTools::NAME  => [
-            'metadataManager'   => [
-                'collections' => [
-                    'posts'    => '{#lazy:~/metadata/posts.config.php}',
-                    'users'    => '{#lazy:~/metadata/users.config.php}',
-                    'tags'     => '{#lazy:~/metadata/tags.config.php}',
-                    'postTags' => '{#lazy:~/metadata/post_tags.config.php}'
-                ]
+            'metadataManagerCollections'   => [
+                'posts'    => '{#lazy:~/metadata/posts.config.php}',
+                'users'    => '{#lazy:~/metadata/users.config.php}',
+                'tags'     => '{#lazy:~/metadata/tags.config.php}',
+                'postTags' => '{#lazy:~/metadata/post_tags.config.php}'
             ],
-            'collectionManager' => [
-                'productId'   => 'demo',
-                'collections' => [
-                    'posts'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
-                    'users'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
-                    'tags'     => ['type' => ICollectionFactory::TYPE_SIMPLE],
-                    'postTags' => ['type' => ICollectionFactory::TYPE_SIMPLE]
-                ]
+            'collectionManagerCollections' => [
+                'posts'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
+                'users'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
+                'tags'     => ['type' => ICollectionFactory::TYPE_SIMPLE],
+                'postTags' => ['type' => ICollectionFactory::TYPE_SIMPLE]
             ]
         ]
     ],
+
     'application' => '{#lazy:~/application/component.config.php}'
 ];

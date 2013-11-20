@@ -33,7 +33,7 @@ class TagController extends BaseController
         $guid = $request->getVar(IComponentRequest::ROUTE, 'id');
         $tag = $this->tagModel->getTag($guid);
 
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'tag',
             [
                 'tag'   => $tag,

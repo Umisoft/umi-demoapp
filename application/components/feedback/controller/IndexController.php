@@ -7,7 +7,7 @@ use umi\form\IForm;
 use umi\form\IFormAware;
 use umi\form\TFormAware;
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\controller\result\IControllerResult;
+use umi\hmvc\component\response\IComponentResponse;
 use umi\hmvc\controller\type\BaseController;
 use umi\hmvc\model\IModelAware;
 use umi\hmvc\model\TModelAware;
@@ -56,7 +56,7 @@ class IndexController extends BaseController implements IFormAware, IModelAware
                 $contactModel = $this->createModelByName('contact');
                 $contactModel->sendContact($data);
 
-                return $this->createControllerResult('complete');
+                return $this->createDisplayResponse('complete', []);
             }
 
             return $this->showForm($form);
@@ -75,10 +75,10 @@ class IndexController extends BaseController implements IFormAware, IModelAware
     /**
      * Отображает форму обратной связи.
      * @param IForm $form
-     * @return IControllerResult
+     * @return IComponentResponse
      */
     public function showForm(IForm $form)
     {
-        return $this->createControllerResult('index', ['form' => $form]);
+        return $this->createDisplayResponse('index', ['form' => $form]);
     }
 }

@@ -5,8 +5,8 @@ use application\components\blog\model\PostModel;
 use umi\form\IFormAware;
 use umi\form\TFormAware;
 use umi\hmvc\component\request\IComponentRequest;
-use umi\hmvc\context\IRouterContext;
-use umi\hmvc\context\TRouterContext;
+use umi\hmvc\context\IContextAware;
+use umi\hmvc\context\TContextAware;
 use umi\hmvc\controller\type\BaseController;
 use umi\pagination\IPaginationAware;
 use umi\pagination\TPaginationAware;
@@ -15,11 +15,11 @@ use umi\pagination\TPaginationAware;
  * Контроллер отображения списка постов блога.
  * @package App\Blog
  */
-class IndexController extends BaseController implements IFormAware, IPaginationAware, IRouterContext
+class IndexController extends BaseController implements IFormAware, IPaginationAware, IContextAware
 {
     use TFormAware;
     use TPaginationAware;
-    use TRouterContext;
+    use TContextAware;
 
     /**
      * Количество выводимых постов на странице.
@@ -46,20 +46,31 @@ class IndexController extends BaseController implements IFormAware, IPaginationA
     public function __invoke(IComponentRequest $request)
     {
         $deleteForm = $this->createForm(require dirname(__DIR__) . '/form/deletePost.php');
-        $deleteForm->getAttributes()['action'] = $this->getContextRouter()
-            ->assemble('deletePost');
+        $deleteForm->getAttributes()['action'] = $this->getUrl('deletePost');
 
         $posts = $this->postModel->getPosts();
 
         $paginator = $this->createPaginator($posts, self::POSTS_PER_PAGE);
         $paginator->setCurrentPage($request->getVar(IComponentRequest::ROUTE, 'page', 1));
 
-        return $this->createControllerResult(
+        return $this->createDisplayResponse(
             'index',
             [
                 'paginator'  => $paginator,
                 'deleteForm' => $deleteForm
             ]
         );
+    }
+
+    /**
+     * Формирует URL комопнента.
+     * @param string $name имя маршрута
+     * @param array $params параметры маршрута
+     * @return string
+     */
+    protected function getUrl($name, array $params = [])
+    {
+        return $this->getContext()->getComponent()->getRouter()
+            ->assemble($name, $params);
     }
 }

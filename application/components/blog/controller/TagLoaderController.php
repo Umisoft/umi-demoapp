@@ -33,7 +33,7 @@ class TagLoaderController extends BaseController
         $tagPart = $request->getVar(IComponentRequest::ROUTE, 'tag');
         $tags = $this->tagModel->getTags($tagPart);
 
-        $response = $this->createComponentResponse(
+        $response = $this->createPlainResponse(
             json_encode($tags)
         );
         $response->getHeaders()
