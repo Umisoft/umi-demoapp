@@ -43,13 +43,13 @@ return [
             ],
         ],
         ORMTools::NAME  => [
-            'metadataManagerCollections'   => [
+            'metadata'   => [
                 'posts'    => '{#lazy:~/metadata/posts.config.php}',
                 'users'    => '{#lazy:~/metadata/users.config.php}',
                 'tags'     => '{#lazy:~/metadata/tags.config.php}',
                 'postTags' => '{#lazy:~/metadata/post_tags.config.php}'
             ],
-            'collectionManagerCollections' => [
+            'collections' => [
                 'posts'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
                 'users'    => ['type' => ICollectionFactory::TYPE_SIMPLE],
                 'tags'     => ['type' => ICollectionFactory::TYPE_SIMPLE],
