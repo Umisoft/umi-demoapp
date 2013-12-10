@@ -1,5 +1,15 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 use umi\filter\IFilterFactory;
+use umi\form\element\Text;
+use umi\form\element\Textarea;
 use umi\validation\IValidatorFactory;
 
 return [
@@ -10,7 +20,7 @@ return [
         // элемент Фамилия Имя
         'name'    => [
             // тип элемента
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             'label'      => 'Name',
             // аттрибуты элемента
             'attributes' => [
@@ -27,7 +37,7 @@ return [
         ],
         // элемент Email
         'email'   => [
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             'label'      => 'E-mail',
             'attributes' => [
                 'id' => 'contact_email',
@@ -42,7 +52,7 @@ return [
         ],
         // элемент Тема сообщения
         'subject' => [
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             'label'      => 'Subject',
             'attributes' => [
                 'id' => 'contact_subject',
@@ -53,7 +63,7 @@ return [
         ],
         // элемент Тело сообщения
         'content' => [
-            'type'       => 'textarea',
+            'type'       => Textarea::TYPE_NAME,
             'label'      => 'Message',
             'attributes' => [
                 'id'   => 'contact_content',

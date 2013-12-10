@@ -1,5 +1,15 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 use umi\filter\IFilterFactory;
+use umi\form\element\Password;
+use umi\form\element\Text;
 use umi\validation\IValidatorFactory;
 
 return [
@@ -16,7 +26,7 @@ return [
         // элемент Email
         'email'    => [
             // тип элемента
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             // label элемента
             'label'      => 'E-mail',
             // аттрибуты элемента
@@ -35,7 +45,7 @@ return [
         ],
         // элемента Password
         'password' => [
-            'type'       => 'password',
+            'type'       => Password::TYPE_NAME,
             'label'      => 'Password',
             'attributes' => [
                 'id'    => 'login_password',

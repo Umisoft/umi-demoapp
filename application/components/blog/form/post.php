@@ -1,5 +1,16 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 use umi\filter\IFilterFactory;
+use umi\form\element\CSRF;
+use umi\form\element\Text;
+use umi\form\element\Textarea;
 use umi\validation\IValidatorFactory;
 
 return [
@@ -15,7 +26,7 @@ return [
     'elements'   => [
         'title'   => [
             // тип элемента
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             // label элемента
             'label'      => 'Title',
             // аттрибуты элемента
@@ -31,7 +42,7 @@ return [
         ],
         'content' => [
             // тип элемента
-            'type'       => 'textarea',
+            'type'       => Textarea::TYPE_NAME,
             // label элемента
             'label'      => 'Message',
             // аттрибуты элемента
@@ -50,7 +61,7 @@ return [
         ],
         'tags'    => [
             // тип элемента
-            'type'       => 'text',
+            'type'       => Text::TYPE_NAME,
             // label элемента
             'label'      => 'Tags',
             // аттрибуты элемента
@@ -68,7 +79,7 @@ return [
             'validators' => []
         ],
         'csrf'    => [
-            'type' => 'csrf'
+            'type' => CSRF::TYPE_NAME
         ],
     ]
 ];

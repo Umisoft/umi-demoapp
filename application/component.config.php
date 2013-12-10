@@ -1,4 +1,12 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 namespace application;
 
 use umi\hmvc\component\IComponent;
@@ -19,10 +27,6 @@ return [
         Application::LAYOUT_CONTROLLER => __NAMESPACE__ . '\controller\LayoutController',
         'index'                        => __NAMESPACE__ . '\controller\IndexController'
     ],
-    // зарегистрированные модели
-    IComponent::OPTION_MODELS      => [
-        'user' => __NAMESPACE__ . '\model\UserModel'
-    ],
     // настройки шаблонизатора
     IComponent::OPTION_VIEW        => [
         // тип шаблонизатора
@@ -38,7 +42,7 @@ return [
     // маршруты текущего компонента
     IComponent::OPTION_ROUTES      => [
         'home' => [
-            // тип маршрута - на основе simple-выражений
+            // тип маршрута - простой расширеный
             'type'      => IRouteFactory::ROUTE_EXTENDED,
             // путь(маска) маршрута
             'route'     => '/{lang}',
