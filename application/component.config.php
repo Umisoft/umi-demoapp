@@ -39,6 +39,10 @@ return [
             'componentUrl'   => __NAMESPACE__ . '\view\helper\ComponentUrlViewHelper'
         ]
     ],
+    // зарегистрированные модели
+    IComponent::OPTION_MODELS      => [
+        'user'   => 'application\model\UserModel'
+    ],
     // маршруты текущего компонента
     IComponent::OPTION_ROUTES      => [
         'home' => [
