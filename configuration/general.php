@@ -42,10 +42,11 @@ return [
                 [
                     'id'     => 'demoDB',
                     'type'   => 'master',
-                    'driver' => [
-                        'type'    => 'sqlite',
+                    'connection' => [
+                        'type'    => DbalTools::PDO_SQLITE,
                         'options' => [
-                            'dsn' => 'sqlite:' . __DIR__ . '/../demo.db'
+                            'file' => __DIR__ . '/../demo.db',
+                            'memory'=>false
                         ]
                     ]
                 ]
