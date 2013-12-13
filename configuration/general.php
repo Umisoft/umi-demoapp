@@ -40,7 +40,7 @@ return [
         DbalTools::NAME => [
             'servers' => [
                 [
-                    'id'     => 'sqliteMaster',
+                    'id'     => 'demoDB',
                     'type'   => 'master',
                     'connection' => [
                         'type'    => DbalTools::CONNECTION_TYPE_PDOSQLITE,
