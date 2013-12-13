@@ -31,12 +31,12 @@ return [
         DbalTools::NAME => [
             'servers' => [
                 [
-                    'id'     => 'demoDB',
+                    'id'     => 'sqliteMaster',
                     'type'   => 'master',
-                    'driver' => [
-                        'type'    => 'sqlite',
+                    'connection' => [
+                        'type'    => DbalTools::CONNECTION_TYPE_PDOSQLITE,
                         'options' => [
-                            'dsn' => 'sqlite:' . __DIR__ . '/../demo.db'
+                            'path' => __DIR__ . '/../demo.db'
                         ]
                     ]
                 ]
