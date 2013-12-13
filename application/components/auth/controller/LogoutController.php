@@ -5,6 +5,7 @@
  * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
  * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
  */
+
 namespace application\components\auth\controller;
 
 use application\model\UserModel;
@@ -14,7 +15,7 @@ use umi\hmvc\context\TContextAware;
 use umi\hmvc\controller\type\BaseController;
 
 /**
- * Class LogoutController
+ * Контроллер разавторизации пользователя.
  */
 class LogoutController extends BaseController implements IContextAware
 {

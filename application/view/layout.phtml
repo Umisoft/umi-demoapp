@@ -33,19 +33,19 @@
                             <li class="divider"></li>
                             <li class="active">
                                 <a href="<?= $this->url('home', [], true) ?>">
-                                    <?= $this->translate("Home"); ?>
+                                    <?= $this->translate("Home") ?>
                                 </a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="<?= $this->url('home/component', ['component' => 'blog'], true) ?>">
-                                    <?= $this->translate("Blog"); ?>
+                                    <?= $this->translate("Blog") ?>
                                 </a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="<?= $this->url('home/component', ['component' => 'feedback'], true) ?>">
-                                    <?= $this->translate("Feedback"); ?>
+                                    <?= $this->translate("Feedback") ?>
                                 </a>
                             </li>
                         </ul>
@@ -55,9 +55,9 @@
         </div>
 
         <div class="row" style="margin-top: 25px">
-            <div class="columns large-12"><?php
-                echo $content;
-                ?></div>
+            <div class="columns large-12">
+                <?= $content ?>
+            </div>
         </div>
 
         <footer class="row">

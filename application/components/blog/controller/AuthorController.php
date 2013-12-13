@@ -1,4 +1,12 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 namespace application\components\blog\controller;
 
 use application\components\blog\model\AuthorModel;
@@ -6,8 +14,7 @@ use umi\hmvc\component\request\IComponentRequest;
 use umi\hmvc\controller\type\BaseController;
 
 /**
- * Контроллер отображения блогов по авторам.
- * @package App\Blog
+ * Контроллер отображения постов по авторам.
  */
 class AuthorController extends BaseController
 {

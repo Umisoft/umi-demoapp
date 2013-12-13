@@ -1,7 +1,16 @@
 <?php
+/**
+ * UMI.Framework (http://umi-framework.ru/)
+ *
+ * @link      http://github.com/Umisoft/framework for the canonical source repository
+ * @copyright Copyright (c) 2007-2013 Umisoft ltd. (http://umisoft.ru/)
+ * @license   http://umi-framework.ru/license/bsd-3 BSD-3 License
+ */
+
 namespace application\components\blog;
 
 use umi\hmvc\component\IComponent;
+use umi\route\IRouteFactory;
 
 return [
     // зарегистрированные контроллеры
@@ -35,58 +44,49 @@ return [
     // роутинг текущего компонента
     IComponent::OPTION_ROUTES      => [
         'post'       => [
-            'type'     => 'simple',
+            'type'     => IRouteFactory::ROUTE_SIMPLE,
             'route'    => '/post/{id:guid}',
             'defaults' => [
                 'controller' => 'post/view'
             ]
         ],
         'author'     => [
-            'type'     => 'simple',
+            'type'     => IRouteFactory::ROUTE_SIMPLE,
             'route'    => '/author/{id:guid}',
             'defaults' => [
                 'controller' => 'post/author'
             ]
         ],
         'tag'        => [
-            'type'     => 'simple',
+            'type'     => IRouteFactory::ROUTE_SIMPLE,
             'route'    => '/tag/{id:guid}',
-            // параметры роутинга по умолчанию
             'defaults' => [
                 'controller' => 'post/tag'
             ]
         ],
         'getTags'    => [
-            'type'     => 'fixed',
+            'type'     => IRouteFactory::ROUTE_FIXED,
             'route'    => '/getTags',
             'defaults' => [
                 'controller' => 'tag/list'
             ]
         ],
-        // роутинг для добавления поста
         'addPost'    => [
-            // тип роута - простой
-            'type'     => 'fixed',
-            // путь(маска) роута
+            'type'     => IRouteFactory::ROUTE_FIXED,
             'route'    => '/post/add',
-            // параметры роутинга по умолчанию
             'defaults' => [
                 'controller' => 'post/add'
             ]
         ],
-        // роутинг для удаления поста
         'deletePost' => [
-            // тип роута - простой
-            'type'     => 'fixed',
-            // путь(маска) роута
+            'type'     => IRouteFactory::ROUTE_FIXED,
             'route'    => '/post/delete',
-            // параметры роутинга по умолчанию
             'defaults' => [
                 'controller' => 'post/delete'
             ]
         ],
         'index'      => [
-            'type'     => 'simple',
+            'type'     => IRouteFactory::ROUTE_SIMPLE,
             'route'    => '/{page:integer}',
             'defaults' => [
                 'controller' => 'post/list',
