@@ -9,6 +9,6 @@
         }
     },
     "require": {
-        "umi/framework": "dev-master"
+        "umi/framework": "~1.0.0@RC"
     }
 }
