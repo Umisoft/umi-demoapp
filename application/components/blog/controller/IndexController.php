@@ -57,7 +57,7 @@ class IndexController extends BaseController implements IFormAware, IPaginationA
 
         $posts = $this->postModel->getPosts();
 
-        $paginator = $this->createPaginator($posts, self::POSTS_PER_PAGE);
+        $paginator = $this->createObjectPaginator($posts, self::POSTS_PER_PAGE);
         $paginator->setCurrentPage($request->getVar(IComponentRequest::ROUTE, 'page', 1));
 
         return $this->createDisplayResponse(
