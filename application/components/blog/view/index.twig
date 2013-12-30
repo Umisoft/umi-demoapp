@@ -7,17 +7,13 @@
 	});"|format(translate('Do you want to delete post?'))) %}
     {% endif %}
     <div class="row">
-        <div class="large-12 columns">
-            <h2>{{ translate('Blog') }}</h2>
-
-            {% if (getCurrentUser()) %}
-                <div class="large-3 column text-right">
-                    <a class="button" href="{{ url('addPost') }}">{{ translate('Add post') }}</a>
-                </div>
-            {% endif %}
-
-            <hr/>
-        </div>
+        <h2 class="large-9 columns">{{ translate('Blog') }}</h2>
+        {% if (getCurrentUser()) %}
+            <div class="large-3 column text-right">
+                <a class="button" href="{{ url('addPost') }}">{{ translate('Add post') }}</a>
+            </div>
+        {% endif %}
+        <hr/>
     </div>
     {% for post in paginator.getPageItems() %}
         <div class="post row" id="post_{{ post.id }}">
