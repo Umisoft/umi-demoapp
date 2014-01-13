@@ -45,7 +45,7 @@ return [
                     'connection' => [
                         'type'    => DbalTools::CONNECTION_TYPE_PDOSQLITE,
                         'options' => [
-                            'path' => __DIR__ . '/../demo.db'
+                            'path' => dirname(__DIR__) . '/data/demo.db'
                         ]
                     ]
                 ]
