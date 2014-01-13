@@ -20,8 +20,7 @@ return [
         'post/view'   => __NAMESPACE__ . '\controller\PostController',
         'post/delete' => __NAMESPACE__ . '\controller\DeletePostController',
         'post/author' => __NAMESPACE__ . '\controller\AuthorController',
-        'post/tag'    => __NAMESPACE__ . '\controller\TagController',
-        'tag/list'    => __NAMESPACE__ . '\controller\TagLoaderController'
+        'post/tag'    => __NAMESPACE__ . '\controller\TagController'
     ],
     // зарегистрированные модели
     IComponent::OPTION_MODELS      => [
@@ -62,13 +61,6 @@ return [
             'route'    => '/tag/{id:guid}',
             'defaults' => [
                 'controller' => 'post/tag'
-            ]
-        ],
-        'getTags'    => [
-            'type'     => IRouteFactory::ROUTE_FIXED,
-            'route'    => '/getTags',
-            'defaults' => [
-                'controller' => 'tag/list'
             ]
         ],
         'addPost'    => [

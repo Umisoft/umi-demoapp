@@ -88,28 +88,4 @@ class TagModel implements ICollectionManagerAware, IModel
 
         return $result->fetch();
     }
-
-    /**
-     * Возвращает список тегов, которые содержат заданную часть
-     * @param string $tagPart часть тега
-     * @return array
-     */
-    public function getTags($tagPart)
-    {
-        $tagCollection = $this->getCollectionManager()
-            ->getCollection('tags');
-        $result = $tagCollection->select()
-            ->fields('name')
-            ->where('name')
-            ->like('%' . $tagPart . '%');
-        $tags = [];
-        /**
-         * @var IObject $tag
-         */
-        foreach ($result as $tag) {
-            $tags[] = $tag->getValue('name');
-        }
-
-        return $tags;
-    }
 }
