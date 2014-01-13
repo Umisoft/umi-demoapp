@@ -15,17 +15,20 @@ use umi\hmvc\component\response\IComponentResponse;
 use umi\hmvc\context\Context;
 use umi\i18n\ILocalesService;
 use umi\session\ISessionAware;
+use umi\session\ISessionManagerAware;
 use umi\session\TSessionAware;
+use umi\session\TSessionManagerAware;
 use umi\toolkit\IToolkitAware;
 use umi\toolkit\TToolkitAware;
 
 /**
  * MVC Application.
  */
-class Application extends Component implements ISessionAware, IToolkitAware
+class Application extends Component implements ISessionAware, ISessionManagerAware, IToolkitAware
 {
     use TSessionAware;
     use TToolkitAware;
+    use TSessionManagerAware;
 
     /** Контроллер для отображения сетки приложения */
     const LAYOUT_CONTROLLER = 'layout';
@@ -39,11 +42,13 @@ class Application extends Component implements ISessionAware, IToolkitAware
      */
     public function execute(IComponentRequest $request)
     {
-        if (null !== ($response = $this->postRedirectGet($request))) {
-            return $response;
-        } else {
-            return parent::execute($request);
+        $response = $this->postRedirectGet($request);
+        if (is_null($response)) {
+            $response = parent::execute($request);
         }
+        $this->writeSession();
+
+        return $response;
     }
 
     /**
@@ -86,6 +91,7 @@ class Application extends Component implements ISessionAware, IToolkitAware
      */
     protected function postRedirectGet(IComponentRequest $request)
     {
+
         if (!$this->hasSessionNamespace(self::PRG_NAMESPACE)) {
             $this->registerSessionNamespace(self::PRG_NAMESPACE);
         }
@@ -113,7 +119,6 @@ class Application extends Component implements ISessionAware, IToolkitAware
 
             return null;
         }
-
         return null;
     }
 }

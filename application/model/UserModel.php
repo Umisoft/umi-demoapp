@@ -53,7 +53,7 @@ class UserModel implements IAuthenticationAware, IModel
     }
 
     /**
-     * Возвращает имя авторизованного пользователя.
+     * Возвращает авторизованного пользователя.
      * @return object|null авторизованный пользователь.
      */
     public function getCurrentUser()

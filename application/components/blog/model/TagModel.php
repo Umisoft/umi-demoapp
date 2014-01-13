@@ -63,7 +63,7 @@ class TagModel implements ICollectionManagerAware, IModel
         $postTags = $post->getValue('tags');
 
         foreach ($tagNames as $tagName) {
-            $postTags->attach($this->addTag($tagName));
+            $postTags->attach($this->getTagByName($tagName));
         }
     }
 
@@ -72,7 +72,7 @@ class TagModel implements ICollectionManagerAware, IModel
      * @param string $tagName имя тега
      * @return IObject
      */
-    public function addTag($tagName)
+    protected function getTagByName($tagName)
     {
         $tagName = trim($tagName);
         $tagCollection = $this->getCollectionManager()
