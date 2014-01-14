@@ -12,6 +12,7 @@ use umi\config\io\IConfigIO;
 use umi\hmvc\component\IComponentFactory;
 use umi\hmvc\component\request\IComponentRequestFactory;
 use umi\http\request\IRequest;
+use umi\spl\config\TConfigSupport;
 use umi\toolkit\IToolkit;
 use umi\toolkit\Toolkit;
 
@@ -20,6 +21,8 @@ use umi\toolkit\Toolkit;
  */
 class Bootstrap
 {
+    use TConfigSupport;
+
     const OPTION_TOOLKIT = 'toolkit';
     const OPTION_SETTINGS = 'settings';
 
@@ -48,8 +51,8 @@ class Bootstrap
      */
     public function createApplication()
     {
-        // todo: fix toArray
-        $appConfig = $this->configuration->get('application')->toArray();
+        $appConfig = $this->configuration->get('application');
+        $appConfig = $this->configToArray($appConfig);
 
         /** @var IComponentFactory $componentFactory */
         $componentFactory = $this->toolkit->getService('umi\hmvc\component\IComponentFactory');
