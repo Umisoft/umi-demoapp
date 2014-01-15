@@ -16,7 +16,7 @@ use umi\i18n\toolbox\I18nTools;
 
 $applicationPath = dirname(__DIR__);
 $vendorDirectory = $applicationPath . '/vendor';
-$libraryPath = $vendorDirectory . '/umi/framework/library/umi';
+$libraryPath = $vendorDirectory . '/umi/framework/library';
 
 return [
     /**
