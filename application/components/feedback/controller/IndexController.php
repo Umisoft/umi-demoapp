@@ -69,7 +69,8 @@ class IndexController extends BaseController implements IFormAware, IModelAware
             return $this->showForm($form);
         }
 
-        if ($user = $this->userModel->getCurrentUser()) {
+        if ($this->userModel->isAuthenticated()) {
+            $user = $this->userModel->getCurrentUser();
             $form->getElement('name')
                 ->setValue($user->name);
             $form->getElement('email')

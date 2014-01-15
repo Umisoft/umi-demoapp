@@ -9,6 +9,7 @@
 
 namespace application\model;
 
+use umi\authentication\exception\RuntimeException;
 use umi\authentication\IAuthentication;
 use umi\authentication\IAuthenticationAware;
 use umi\authentication\IAuthenticationFactory;
@@ -54,7 +55,8 @@ class UserModel implements IAuthenticationAware, IModel
 
     /**
      * Возвращает авторизованного пользователя.
-     * @return object|null авторизованный пользователь.
+     * @throws RuntimeException если пользователь не был авторизован
+     * @return object авторизованный пользователь.
      */
     public function getCurrentUser()
     {
